@@ -35,5 +35,44 @@ module.exports = function(config){
         });
     });
 
+    router.post('/login', function(req, res, next){
+        req.assert('username', 'Username is required').notEmpty();
+        req.assert('password', 'Password is required').notEmpty();
+        var errors = req.validationErrors();
+        if(errors){
+            return next({
+                status: 400,
+                message: errors
+            });
+        }
+        UserModel.findOne({
+            username: req.body.username
+        }, function(err, user){
+            if(err){
+                return next(err);
+            }
+            if(user){
+                var matched = passwordHash.verify(req.body.password, user.password);
+                if(matched){
+                    var token = createToken(user, config);
+                    res.json({
+                        user: user,
+                        token: token
+                    });
+                }else{
+                    next({
+                        status: 401,
+                        message: "Invalid login credentials"
+                    });
+                }
+            }else{
+                next({
+                    status: 401,
+                    message: "Invalid login credetials"
+                });
+            }
+        });
+    });
+
     return router;
 }
