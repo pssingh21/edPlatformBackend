@@ -3,5 +3,7 @@ module.exports = function(userOut, userIn){
         userOut.username = userIn.username;
     if(userIn.email)
         userOut.email = userIn.email;
+    if(userIn.role)
+        userOut.role = userIn.role;
     return userOut;
 }
