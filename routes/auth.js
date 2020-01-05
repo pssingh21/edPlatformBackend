@@ -28,6 +28,7 @@ module.exports = function(config){
         mappedUser.password = passwordHash.generate(req.body.password);
         mappedUser.save(function(err, user){
             if(err){
+                console.log('in error', err);
                 return next(err);
             }
             console.log('here2');
