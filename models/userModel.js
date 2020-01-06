@@ -13,7 +13,15 @@ var userSchema = new Schema({
         unique: true,
         required: true
     },
-    role: Number
+    role: Number,
+    year: {
+        type: Number,
+        required: true
+    },
+    uni: {
+        type: String,
+        required: true
+    }
 },{
     timestamps: true
 });

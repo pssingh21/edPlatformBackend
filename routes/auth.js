@@ -20,6 +20,8 @@ module.exports = function(config){
         req.assert('username', 'Username is required').notEmpty();
         req.assert('password', 'Password is required').notEmpty();
         req.assert('email','Email is required').notEmpty();
+        req.assert('year','Year is required').notEmpty();
+        req.assert('uni','University is required').notEmpty();
 
         var errors = req.validationErrors();
         var newUser = new UserModel();
