@@ -12,6 +12,8 @@ var dashboard = require('./routes/dashboard');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRoute = require('./routes/auth')(config);
+
+var authenticate = require('./middlewares/authenticate');
 require('./db')(config);
 
 var app = express();
@@ -33,7 +35,7 @@ app.use(expressValidator());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRoute);
-app.use('/dashboard'. authenticate, dashboard);
+app.use('/dashboard', authenticate, dashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
