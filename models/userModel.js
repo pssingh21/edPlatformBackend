@@ -21,6 +21,9 @@ var userSchema = new Schema({
     uni: {
         type: String,
         required: true
+    },
+    points: {
+        type: Number
     }
 },{
     timestamps: true
