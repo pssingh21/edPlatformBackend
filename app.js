@@ -12,8 +12,10 @@ var dashboard = require('./routes/dashboard');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRoute = require('./routes/auth')(config);
+var uni = require('./routes/uni')();
 
 var authenticate = require('./middlewares/authenticate');
+var authorize = require('./middlewares/authorize');
 require('./db')(config);
 
 var app = express();
@@ -35,6 +37,8 @@ app.use(expressValidator());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRoute);
+//app.use('/uni', authenticate, authorize, uni);
+app.use('/uni', uni);
 app.use('/dashboard', authenticate, dashboard);
 
 // catch 404 and forward to error handler
