@@ -5,7 +5,6 @@ var uniSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true
     },
     country: {
         type: String,
@@ -15,6 +14,8 @@ var uniSchema = new Schema({
     studentsParticipated: Number
 },{
     timestamps: true
+},{
+    unique: true
 });
 
 var uniModel = mongoose.model('uni', uniSchema);

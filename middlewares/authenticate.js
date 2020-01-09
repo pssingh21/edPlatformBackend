@@ -7,7 +7,7 @@ module.exports = function(req, res, next){
     if(req.headers['x-access-token']){
         token = req.headers['x-access-token'];
     }
-    if(req.headerss['authorization']){
+    if(req.headers['authorization']){
         token = req.headers['authorization'];
     }
     if(req.query.token){

@@ -38,7 +38,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRoute);
 //app.use('/uni', authenticate, authorize, uni);
-app.use('/uni', uni);
+app.use('/uni', authenticate, uni);
 app.use('/dashboard', authenticate, dashboard);
 
 // catch 404 and forward to error handler
