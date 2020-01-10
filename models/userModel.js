@@ -16,9 +16,11 @@ var userSchema = new Schema({
     role: Number,
     year: {
         type: Number,
-        required: true
     },
     uni: {
+        type: String,
+    },
+    country:{
         type: String,
         required: true
     },

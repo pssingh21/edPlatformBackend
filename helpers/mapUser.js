@@ -5,9 +5,7 @@ module.exports = function(userOut, userIn){
         userOut.email = userIn.email;
     if(userIn.role)
         userOut.role = userIn.role;
-    if(userIn.year)
-        userOut.year = userIn.year;
-    if(userIn.uni)
-        userOut.uni = userIn.uni;
+    if(userIn.country)
+        userOut.country = userIn.country;
     return userOut;
 }

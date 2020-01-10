@@ -1,13 +1,14 @@
 var express = require('express');
 var router  = express.Router();
-var uniModel = require('./../models/uniModel');
+var UniModel = require('./../models/uniModel');
+var UserModel = require('./../models/userModel');
 var uni = require('./../helpers/universityList');
 
 module.exports = function(){
-    router.get('/getUniByCountry/:abbr', function(req, res, next){
+    router.get('/getUniByCountry', function(req, res, next){
 
         var uniOfCountry = uni.filter(function (el) {
-            return el.country == req.params.abbr;
+            return el.country == req.user.country;
         });
 
         var listOfUniversities = uniOfCountry.map(function (obj) {
@@ -26,7 +27,7 @@ module.exports = function(){
             });
             
             for(let uni of uniOfCountry){
-                let newUni = new uniModel();
+                let newUni = new UniModel();
                 newUni.name = uni.name;
                 newUni.country = uni.country;
                 newUni.save(function(err, save){
@@ -43,8 +44,18 @@ module.exports = function(){
             });
         }
         
-        
     });
+
+    router.put('/chooseUni', function(req, res, next){
+        req.assert('uni', 'University is required.').notEmpty();
+        req.assert('year', 'Year is required.').notEmpty();
+        UserModel.findByIdAndUpdate(req.user._id, {uni: req.body.uni, year: req.body.year}, {new: true, useFindAndModify: false}, function(err, user){
+            if(err){
+                return next(err);
+            }
+            res.json(user);
+        });
+    })
 
     return router;
 
