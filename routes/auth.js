@@ -32,7 +32,7 @@ module.exports = function(config){
             if(err){
                 return next(err);
             }
-            console.log('here2');
+            
             res.json(user);
         });
     });

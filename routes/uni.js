@@ -19,7 +19,7 @@ module.exports = function(){
     });
 
     router.get('/addAllUni', function(req, res, next){
-        console.log('req.user');
+        
         if(req.user.role == 1){
             var uniOfCountry = uni.filter(function (el) {
                 return el.country;
