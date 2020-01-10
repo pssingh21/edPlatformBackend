@@ -37,7 +37,6 @@ app.use(expressValidator());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRoute);
-//app.use('/uni', authenticate, authorize, uni);
 app.use('/uni', authenticate, uni);
 app.use('/dashboard', authenticate, dashboard);
 
