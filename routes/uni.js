@@ -57,6 +57,15 @@ module.exports = function(){
         });
     });
 
+    router.get('/getCourses', function(req, res, next){
+        UniModel.findOne({name: req.user.uni}, function(err, uni){
+            if(err){
+                return next(err);
+            }
+            res.json(uni.courses);
+        });
+    });
+
     router.put('/addCourse', function(req, res, next){
         req.assert('courseName', 'Coursename is required.').notEmpty();
         UniModel.findOneAndUpdate({name: req.user.uni}, {$push: {courses: req.body.courseName}}, {useFindAndModify: false}, function(err, uni){
