@@ -66,7 +66,7 @@ module.exports = function(){
             }
             res.json(uni);
         });
-    })
+    });
 
     return router;
 
