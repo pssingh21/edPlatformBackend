@@ -72,7 +72,12 @@ module.exports = function(){
             if(err){
                 return next(err);
             }
-            res.json(uni);
+            UserModel.findByIdAndUpdate(req.user._id, {$addToSet: {courses: req.body.courseName}}, {useFindAndModify: false}, function(error, user){
+                if(error){
+                    return next(error);
+                }
+                res.json(user);
+            });
         });
     });
 
