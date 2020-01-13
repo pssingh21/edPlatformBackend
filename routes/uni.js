@@ -68,8 +68,7 @@ module.exports = function(){
 
     router.put('/addCourse', function(req, res, next){
         req.assert('courseName', 'Coursename is required.').notEmpty();
-        UniModel.findOneAndUpdate({name: req.user.uni}, {$push: {courses: req.body.courseName}}, {useFindAndModify: false}, function(err, uni){
-            console.log('here', err);
+        UniModel.findOneAndUpdate({name: req.user.uni}, {$addToSet: {courses: req.body.courseName}}, {useFindAndModify: false}, function(err, uni){
             if(err){
                 return next(err);
             }
