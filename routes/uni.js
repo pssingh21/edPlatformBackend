@@ -76,6 +76,26 @@ module.exports = function(){
         });
     });
 
+    router.put('/addCoursesToProfile', function(req, res, next){
+        req.assert('courses', 'Courses are required.').notEmpty();
+        if(typeof req.body.courses === 'string'){
+            UserModel.findByIdAndUpdate(req.user._id, {$addToSet: {courses: req.body.courses}}, {useFindAndModify: false}, function(err, user){
+                if(err){
+                    return next(err);
+                }
+                res.json(user);
+            });
+        }else{
+            UserModel.findByIdAndUpdate(req.user._id, {$addToSet: {courses: {$each: req.body.courses}}}, {useFindAndModify: false}, function(err, user){
+                if(err){
+                    return next(err);
+                }
+                res.json(user);
+            });
+        }
+
+    })
+
     return router;
 
 }

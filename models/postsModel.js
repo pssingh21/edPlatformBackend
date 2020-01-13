@@ -19,6 +19,12 @@ var postsSchema = new Schema({
         }
     }],
     likes: Number,
+    uni: {
+        type: String
+    },
+    course: {
+        type: String
+    },
     username: {
         type: Schema.Types.ObjectId,
         ref: 'userModel'

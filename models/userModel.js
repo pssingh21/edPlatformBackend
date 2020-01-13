@@ -20,6 +20,9 @@ var userSchema = new Schema({
     uni: {
         type: String,
     },
+    courses:{
+        type: [String]
+    },
     country:{
         type: String,
         required: true
